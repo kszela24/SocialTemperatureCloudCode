@@ -1,0 +1,14 @@
+{
+  "global": {
+    "parseVersion": "latest"
+  },
+  "applications": {
+    "SocialTemperature": {
+      "applicationId": "7qg7xv2ItjkrOUZqEykWu4iLa0pkuBHLzv8MPR26",
+      "masterKey": "HO8Z8u7J5RW1x5awClBV8uJkJ70UhXnbLFOKxFrY"
+    },
+    "_default": {
+      "link": "SocialTemperature"
+    }
+  }
+}
