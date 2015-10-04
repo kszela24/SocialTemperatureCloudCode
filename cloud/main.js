@@ -5,7 +5,7 @@ var runningTally = Parse.Object.extend("runningTallyNU");
 Parse.Cloud.afterSave("Tweet", function(request){
 	var query = new Parse.Query("runningTallyNU");
 	var currRunningTally = new runningTally();
-	query.ascending("createdAt");
+	query.descending("createdAt");
 	query.first().then(function(queryResult){
 		currRunningTally = queryResult;
 		var countNeg = currRunningTally.get("negative");
@@ -13,7 +13,7 @@ Parse.Cloud.afterSave("Tweet", function(request){
 		if (request.object.get("classification") > 0) {
 			countPos++;
 			currRunningTally.set("positive", countPos);
-		} else {
+		} else if (request.object.get("classification") < 0){
 			countNeg++;
 			currRunningTally.set("negative", countNeg);
 		}
@@ -35,7 +35,7 @@ Parse.Cloud.define("returnSentiment", function(request, response){
     var negOrPos = "";
 
     var query = new Parse.Query("runningTallyNU");
-    query.ascending("createdAt");
+    query.descending("createdAt");
 	query.first().then(function(queryResult){
 		currRunningTally = queryResult;
 		var countNeg = currRunningTally.get("negative");
@@ -51,7 +51,7 @@ Parse.Cloud.define("returnSentiment", function(request, response){
 
 		if (countNeg > countPos) {
 			negOrPos = "negative!";
-			currentPercentage = 100 - $scope.currentPercentage;
+			currentPercentage = 100 - currentPercentage;
 		} else {
 			negOrPos = "positive!";
 		}
