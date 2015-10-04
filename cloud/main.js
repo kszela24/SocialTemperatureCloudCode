@@ -26,4 +26,5 @@ Parse.Cloud.job("newRunningTallyNU", function(request, response) {
 	newRunningTallyNU.set("positive", 0);
 	newRunningTallyNU.set("negative", 0);
 	newRunningTallyNU.save();
+	response.success("Created new running tally object.")
 });
